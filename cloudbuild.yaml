@@ -12,3 +12,6 @@ steps:
   env:
     - "TF_VAR_project-name=${PROJECT_ID}"
 tags: ['cloud-builders-community']
+
+options:
+  logging: CLOUD_LOGGING_ONLY
