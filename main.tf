@@ -1,5 +1,10 @@
-resource "google_storage_bucket" "auto-expire" {
-  name          = "sdp-bucket-458215669694425"
-  location      = "EUROPE-WEST1"
-  force_destroy = true
+module "tf_pipeline" {
+  source                              = "./pipeline"
+  project_id                          = var.project_id
+  region                              = var.region
+  pipeline_name                       = var.pipeline_name
+  #location                            = var.location
+  terraform_version                   = var.terraform_version
+  repository                          = var.repository
+  branch                              = var.branch
 }

@@ -1,0 +1,42 @@
+FROM public.ecr.aws/amazonlinux/amazonlinux:latest
+
+# Define a build argument for the Terraform version
+ARG terraform_version=1.7.0
+ENV TF_VERSION $terraform_version
+
+
+RUN yum update -y
+RUN yum install git -y
+RUN yum install -y wget unzip
+RUN wget https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip
+RUN unzip terraform_${TF_VERSION}_linux_amd64.zip -d /usr/local/bin/
+RUN yum install -y python3
+# RUN curl -L https://github.com/snyk/driftctl/releases/latest/download/driftctl_linux_amd64 -o driftctl
+# RUN chmod +x driftctl
+# RUN mv driftctl /usr/local/bin/
+RUN curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
+RUN python3 get-pip.py
+RUN pip3 install checkov
+RUN pip3 install -U checkov
+RUN wget https://github.com/infracost/infracost/releases/download/v0.10.34/infracost-linux-amd64.tar.gz
+RUN wget https://busybox.net/downloads/binaries/1.28.1-defconfig-multiarch/busybox-x86_64
+RUN mv busybox-x86_64 busybox
+RUN chmod +x busybox
+RUN ./busybox tar xzf infracost-linux-amd64.tar.gz -C /tmp 
+RUN mv /tmp/infracost-linux-amd64 /usr/local/bin/infracost
+RUN yum install jq -y
+RUN yum install unzip -y
+RUN yum install zip -y
+RUN rm get-pip.py
+RUN rm infracost-linux-amd64.tar.gz
+RUN rm busybox
+
+
+RUN echo 'terraform version' >> /root/agent_image.sh && \
+    echo 'python3 --version' >> /root/agent_image.sh && \
+    echo 'infracost --version' >> /root/agent_image.sh && \
+    chmod +x /root/agent_image.sh
+
+EXPOSE 80
+
+CMD /root/agent_image.sh

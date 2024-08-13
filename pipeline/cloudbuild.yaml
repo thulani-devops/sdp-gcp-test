@@ -1,0 +1,26 @@
+steps:
+  - id: 'terraform init'
+    name: '${IMAGE}'
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - |
+        terraform init
+        terraform validate
+
+  - id: 'terraform plan'
+    name: '${IMAGE}'
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - terraform plan
+
+  - id: 'terraform apply'
+    name: '${IMAGE}'
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - terraform apply --auto-approve
+
+options:
+  logging: CLOUD_LOGGING_ONLY
