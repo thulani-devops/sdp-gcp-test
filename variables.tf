@@ -37,5 +37,18 @@ variable "branch" {
 variable "repository" {
   type        = string
   description = "Provide repository name"
-  default     = "thulani-devops/sdp-gcp-test"
+  default     = "sdp-gcp-test"
+}
+
+variable "owner" {
+  type        = string
+  description = "Owner of git"
+  default     = "thulani-devops"
+}
+
+variable "infracost_api_key" {
+  type        = string
+  sensitive   = true
+  description = "Infracost api key"
+  default     = "ico-LESrGSOlsI7xz9bPk4dNaF2eUtzb8Mi5"
 }

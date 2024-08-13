@@ -32,3 +32,21 @@ variable "repository" {
   type        = string
   description = "Provide repository name"
 }
+
+variable "owner" {
+  type        = string
+  description = "Owner of git"
+}
+
+variable "terralist_token" {
+  type        = string
+  sensitive   = true
+  description = "Terralist api key"
+  default     = "91fa2034-6186-403c-8c46-0a6451b5c87f"
+}
+
+variable "infracost_api_key" {
+  type        = string
+  sensitive   = true
+  description = "Infracost api key"
+}

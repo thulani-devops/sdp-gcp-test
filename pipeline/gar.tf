@@ -3,6 +3,13 @@ resource "google_container_registry" "default" {
   #location = var.location
 }
 
+# resource "google_artifact_registry_repository" "repo" {
+#   repository_id = "${var.pipeline_name}-image"
+#   description   = "pipeline-image"
+#   format        = "DOCKER"
+# }
+
+
 resource "null_resource" "docker_terraform" {
   provisioner "local-exec" {
     command = <<EOT

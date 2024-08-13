@@ -7,4 +7,6 @@ module "tf_pipeline" {
   terraform_version                   = var.terraform_version
   repository                          = var.repository
   branch                              = var.branch
+  owner                               = var.owner
+  infracost_api_key                   = var.infracost_api_key
 }
