@@ -10,17 +10,23 @@ variable "region" {
   default     = "EUROPE-WEST1"
 }
 
+variable "region2" {
+  type        = string
+  description = "GCP Region your resources should be deployed in"
+  default     = "europe-west1"
+}
+
 variable "pipeline_name" {
   type        = string
   description = "Name that will be used for creating most GCP resources for the pipeline"
   default     = "pipeline-test"
 }
 
-# variable "location" {
-#   type        = string
-#   description = "GCP location your resources should be deployed in"
-#   default     = "EU"
-# }
+variable "location" {
+  type        = string
+  description = "GCP location your resources should be deployed in"
+  default     = "EU"
+}
 
 variable "terraform_version" {
   type        = string
@@ -31,7 +37,7 @@ variable "terraform_version" {
 variable "branch" {
   type        = string
   description = "Branch of your repository the pipeline should point at"
-  default     = "main"
+  default     = "dev"
 }
 
 variable "repository" {
