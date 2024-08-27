@@ -1,6 +1,7 @@
 resource "google_cloudbuild_trigger" "trigger" {
   name = "${var.pipeline_name}-trigger"
   location = "global"
+  service_account = google_service_account.custom_cloudbuild_sa.id
   github {
     owner = var.owner
     name  = var.repository
@@ -70,7 +71,6 @@ resource "google_cloudbuild_trigger" "trigger" {
         "terraform apply --auto-approve && echo terraform apply and Checkov completed on `date`"
       ]
     }
-    
   }
   depends_on = [
     null_resource.docker_terraform
