@@ -44,6 +44,24 @@ resource "google_cloudbuild_trigger" "trigger" {
       ]
     }
     step {
+      id = "Trigger Approval"
+      name = "gcr.io/cloud-builders/gcloud"
+      entrypoint = "sh"
+      args = [
+        "-c",
+        "gcloud pubsub topics publish ${var.pipeline_name}-manual-approval-topic --message \"Approval required\""
+      ]
+    }
+    step {
+      id = "Waiting for Approval"
+      name = "gcr.io/cloud-builders/gcloud"
+      entrypoint = "sh"
+      args = [
+        "-c",
+        "until gcloud pubsub subscriptions pull --auto-ack --limit=1 ${var.pipeline_name}-manual-approval-subscription; do sleep 10; done"
+      ]
+    }
+    step {
       id = "terraform apply"
       name = local.image
       entrypoint = "sh"

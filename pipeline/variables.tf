@@ -8,10 +8,10 @@ variable "region" {
   description = "GCP Region your resources should be deployed in"
 }
 
-# variable "location" {
-#   type        = string
-#   description = "GCP location your resources should be deployed in"
-# }
+variable "location" {
+  type        = string
+  description = "GCP location your resources should be deployed in"
+}
 
 variable "pipeline_name" {
   type        = string

@@ -3,10 +3,8 @@ locals {
   branch = "^${var.branch}$"
 }
 
-data "template_file" "cloudbuild" {
-  template = file("${path.module}/cloudbuild.yaml")
-
-  vars = {
-    IMAGE   = local.image
-  }
+data "archive_file" "function_zip" {
+  type        = "zip"
+  source_dir  = "${path.module}/function-source"
+  output_path = "${path.module}/function-source.zip"
 }

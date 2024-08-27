@@ -8,13 +8,13 @@ module "tf_pipeline" {
   branch                              = var.branch
   owner                               = var.owner
   infracost_api_key                   = var.infracost_api_key
+  location                            = var.location
 }
 
 module "tf_state" {
   source                              = "./statebucket"
   project_id                          = var.project_id
   pipeline_name                       = var.pipeline_name
-  region2                             = var.region2
   location                            = var.location
 }
 

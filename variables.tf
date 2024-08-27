@@ -4,13 +4,13 @@ variable "project_id" {
   default     = "general-dev-372307"
 }
 
-variable "region" {
-  type        = string
-  description = "GCP Region your resources should be deployed in"
-  default     = "EUROPE-WEST1"
-}
+# variable "region" {
+#   type        = string
+#   description = "GCP Region your resources should be deployed in"
+#   default     = "EUROPE-WEST1"
+# }
 
-variable "region2" {
+variable "region" {
   type        = string
   description = "GCP Region your resources should be deployed in"
   default     = "europe-west1"

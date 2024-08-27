@@ -7,7 +7,7 @@
 #   source_archive_object = google_storage_bucket_object.function_zip.name
 #   trigger_http          = true
 #   entry_point           = "app"
-#   region                = var.region2
+#   region                = var.region
 
 #   environment_variables = {
 #     COLLECTION = "${var.pipeline_name}_terraform_locks"
