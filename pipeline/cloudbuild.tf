@@ -17,6 +17,7 @@ resource "google_cloudbuild_trigger" "trigger" {
 
 #   filename = data.template_file.cloudbuild.rendered
   build {
+    logs_bucket = google_storage_bucket.cloudbuild_logs.url
     step {
       id = "terraform init"
       name = local.image

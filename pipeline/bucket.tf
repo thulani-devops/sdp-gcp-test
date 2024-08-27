@@ -10,3 +10,10 @@ resource "google_storage_bucket_object" "function_zip" {
   bucket = google_storage_bucket.function_source.name
   source = data.archive_file.function_zip.output_path
 }
+
+resource "google_storage_bucket" "cloudbuild_logs" {
+  name          = "${var.project_id}-cloudbuild-logs"
+  location      = var.location
+  force_destroy = true
+}
+
