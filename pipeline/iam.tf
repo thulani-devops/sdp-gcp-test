@@ -3,45 +3,9 @@ resource "google_service_account" "custom_cloudbuild_sa" {
   display_name = "${var.pipeline_name} Cloud Build Service Account"
 }
 
-resource "google_project_iam_binding" "cloudbuild_permissions" {
-  project = var.project_id
-  role    = "roles/cloudbuild.builds.editor"
-
-  members = [
-    "serviceAccount:${google_service_account.custom_cloudbuild_sa.email}",
-  ]
-}
-
-resource "google_project_iam_binding" "storage_admin" {
-  project = var.project_id
-  role    = "roles/storage.admin"
-
-  members = [
-    "serviceAccount:${google_service_account.custom_cloudbuild_sa.email}",
-  ]
-}
-
-resource "google_project_iam_binding" "compute_admin" {
-  project = var.project_id
-  role    = "roles/compute.admin"
-
-  members = [
-    "serviceAccount:${google_service_account.custom_cloudbuild_sa.email}",
-  ]
-}
-
 resource "google_project_iam_binding" "artifact_registry_reader" {
   project = var.project_id
   role    = "roles/artifactregistry.reader"
-
-  members = [
-    "serviceAccount:${google_service_account.custom_cloudbuild_sa.email}",
-  ]
-}
-
-resource "google_project_iam_binding" "service_account_user" {
-  project = var.project_id
-  role    = "roles/iam.serviceAccountUser"
 
   members = [
     "serviceAccount:${google_service_account.custom_cloudbuild_sa.email}",
@@ -92,3 +56,58 @@ resource "google_project_iam_binding" "cloud_sql_admin" {
     "serviceAccount:${google_service_account.custom_cloudbuild_sa.email}",
   ]
 }
+
+resource "google_project_iam_binding" "cloudbuild_permissions" {
+  project = var.project_id
+  role    = "roles/cloudbuild.builds.editor"
+
+  members = [
+    "serviceAccount:${google_service_account.custom_cloudbuild_sa.email}",
+  ]
+}
+
+resource "google_project_iam_binding" "storage_admin" {
+  project = var.project_id
+  role    = "roles/storage.admin"
+
+  members = [
+    "serviceAccount:${google_service_account.custom_cloudbuild_sa.email}",
+  ]
+}
+
+resource "google_project_iam_binding" "compute_admin" {
+  project = var.project_id
+  role    = "roles/compute.admin"
+
+  members = [
+    "serviceAccount:${google_service_account.custom_cloudbuild_sa.email}",
+  ]
+}
+
+resource "google_project_iam_binding" "artifact_registry_admin" {
+  project = var.project_id
+  role    = "roles/artifactregistry.admin"
+
+  members = [
+    "serviceAccount:${google_service_account.custom_cloudbuild_sa.email}",
+  ]
+}
+
+resource "google_project_iam_binding" "iam_service_account_user" {
+  project = var.project_id
+  role    = "roles/iam.serviceAccountUser"
+
+  members = [
+    "serviceAccount:${google_service_account.custom_cloudbuild_sa.email}",
+  ]
+}
+
+resource "google_project_iam_binding" "pubsub_admin" {
+  project = var.project_id
+  role    = "roles/pubsub.admin"
+
+  members = [
+    "serviceAccount:${google_service_account.custom_cloudbuild_sa.email}",
+  ]
+}
+
